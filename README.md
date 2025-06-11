@@ -20,3 +20,61 @@ This Python module simulates a subset of PyROOT-style syntax using the `uproot` 
 
 > ✅ Currently supports histogram plotting, Gaussian fitting, branch access, and future extensions like cut strings (`"Muon_pt > 30 && isElectron"`) are planned.
 > ⚠️ This is *not* a full PyROOT replacement — but it does 80% of the work you need for basic analysis and learning.
+
+
+## ✅ Quickstart
+
+### 🧪 Step-by-step to run it on Google Colab:
+
+1. **Create a new notebook** in [Google Colab](https://colab.research.google.com/).
+
+2. Install the required packages:
+
+   ```python
+   !pip install uproot matplotlib scipy
+   ```
+
+3. **Import the wrapper from GitHub**:
+
+   ```python
+   !wget https://raw.githubusercontent.com/abhinavdharmesh/ROOT/main/uproot_wrapper.py
+   from uproot_wrapper import TFile
+   ```
+
+4. **Use it like PyROOT!**
+
+   ```python
+   file = TFile("test_data.root")
+   tree = file.Get("Events")
+   tree.Draw("Muon_pt", bins=100, fit="gaus")
+   ```
+
+---
+
+## 🔄 PyROOT vs Wrapper Syntax Comparison
+
+| PyROOT                       | This Wrapper (Uproot under hood)     |
+| ---------------------------- | ------------------------------------ |
+| `TFile("file.root")`         | `TFile("file.root")`                 |
+| `file.Get("tree")`           | `file.Get("tree")`                   |
+| `tree.Draw("branch")`        | `tree.Draw("branch")`                |
+| `tree.GetBranch("branch")`   | `tree.GetBranch("branch")`           |
+| Gaussian fit (`TF1 + Fit()`) | `fit="gaus"` inside `Draw()`         |
+| `TH1F` Histogram object      | Auto-done with `matplotlib.hist()`   |
+| `canvas.SaveAs("file.png")`  | `plt.savefig("file.png")` (if added) |
+
+> **Not Supported Yet:**
+> `TTree::Scan`, `TCanvas`, `TLegend`, event loop macros, object trees, TChain, etc.
+> You’re in the “stat plotting and fitting” comfort zone – perfect for learning and small demos.
+
+---
+
+## ⚠️ Notes
+
+* This wrapper is **not a full ROOT simulator**.
+* It’s ideal for *histograms*, *basic data inspection*, and *Gaussian fitting*.
+* You can extend it further with functions like:
+
+  * `tree.SaveHistogram()`
+  * `tree.PlotOverlay(branch1, branch2)`
+  * or add `TGraph`-like support with `matplotlib.plot()`
