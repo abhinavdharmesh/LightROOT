@@ -5,19 +5,6 @@ This Python module simulates a subset of PyROOT-style syntax using the `uproot` 
 
 ---
 
-### 🧠 Command Mapping Table (PyROOT ➡️ uproot Wrapper)
-
-| PyROOT Syntax                      | Wrapper Equivalent                 | Notes                                                  |
-| ---------------------------------- | ---------------------------------- | ------------------------------------------------------ |
-| `TFile("file.root")`               | `TFile("file.root")`               | Opens ROOT file via `uproot.open` internally           |
-| `file.Get("tree")`                 | `file.Get("tree")`                 | Returns a `TTree` wrapper object                       |
-| `tree.GetBranch("branch")`         | `tree.GetBranch("branch")`         | Provides access to a branch (can be removed if unused) |
-| `tree.Draw("Muon_pt")`             | `tree.Draw("Muon_pt")`             | Plots histogram using matplotlib, optional fit support |
-| `tree.Draw("Muon_pt", fit="gaus")` | `tree.Draw("Muon_pt", fit="gaus")` | Applies Gaussian fit with `scipy.optimize.curve_fit`   |
-| `tree.Draw(..., range=(a,b))`      | `tree.Draw(..., range=(a,b))`      | Custom histogram x-range                               |
-
----
-
 > ✅ Currently supports histogram plotting, Gaussian fitting, branch access, and future extensions like cut strings (`"Muon_pt > 30 && isElectron"`) are planned.
 > ⚠️ This is *not* a full PyROOT replacement — but it does 80% of the work you need for basic analysis and learning.
 
